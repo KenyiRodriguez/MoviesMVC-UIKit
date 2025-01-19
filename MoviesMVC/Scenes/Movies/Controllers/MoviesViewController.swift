@@ -67,10 +67,10 @@ extension MoviesViewController {
         let moviesInteractor = MoviesInteractor(moviesService: moviesService)
         
         let view = MoviesView(listAdapter: listAdapter,
-                                  searchAdapter: searchAdapter)
+                              searchAdapter: searchAdapter)
         
         let controller = MoviesViewController(view: view,
-                                                    moviesInteractor: moviesInteractor)
+                                              moviesInteractor: moviesInteractor)
         
         controller.tabBarItem.title = "Movies"
         controller.tabBarItem.image = UIImage(systemName: "square.grid.2x2")

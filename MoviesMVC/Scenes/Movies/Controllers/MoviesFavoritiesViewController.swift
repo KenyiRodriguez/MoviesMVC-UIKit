@@ -11,14 +11,11 @@ class MoviesFavoritiesViewController: UIViewController {
     
     private let moviesView: MoviesViewProtocol
     private let moviesInteractor: MoviesFavoritesInteractorProtocol
-    private let navigationStyle: NavigationBarStyle
-    
+
     init(view: MoviesViewProtocol, 
-         moviesInteractor: MoviesFavoritesInteractorProtocol,
-         navigationStyle: NavigationBarStyle) {
+         moviesInteractor: MoviesFavoritesInteractorProtocol) {
         self.moviesView = view
         self.moviesInteractor = moviesInteractor
-        self.navigationStyle = navigationStyle
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,7 +30,6 @@ class MoviesFavoritiesViewController: UIViewController {
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationStyle.configure(self)
         self.getAll()
     }
 }
@@ -69,11 +65,10 @@ extension MoviesFavoritiesViewController {
         let moviesInteractor = MoviesFavoritesInteractor(moviesStorage: moviesStorage)
                 
         let view = MoviesView(listAdapter: listAdapter,
-                                  searchAdapter: searchAdapter)
+                              searchAdapter: searchAdapter)
 
         let controller = MoviesFavoritiesViewController(view: view, 
-                                                        moviesInteractor: moviesInteractor,
-                                                        navigationStyle: NavigationBarSimpleShow())
+                                                        moviesInteractor: moviesInteractor)
         
         controller.tabBarItem.title = "Favorites"
         controller.tabBarItem.image = UIImage(systemName: "star")

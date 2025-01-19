@@ -11,6 +11,7 @@ class MovieViewController: UIViewController {
  
     private var movieView: MovieViewProtocol
     private let movieInteractor: MovieInteractorProtocol
+    private let navigationStyle: NavigationBarStyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +19,22 @@ class MovieViewController: UIViewController {
         self.getDetail()
     }
 
-    init(view: MovieViewProtocol, movieInteractor: MovieInteractorProtocol) {
+    init(view: MovieViewProtocol, 
+         movieInteractor: MovieInteractorProtocol,
+         navigationStyle: NavigationBarStyle) {
         self.movieView = view
         self.movieInteractor = movieInteractor
+        self.navigationStyle = navigationStyle
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationStyle.configure(self)
     }
 }
 
@@ -69,6 +78,7 @@ extension MovieViewController {
                                               movieService: movieService,
                                               movieStorage: movieStorage)
         return MovieViewController(view: view,
-                                         movieInteractor: movieInteractor)
+                                   movieInteractor: movieInteractor,
+                                   navigationStyle: NavigationBarSimpleShow())
     }
 }
